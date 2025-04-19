@@ -9,6 +9,18 @@ export default function Home() {
     .filter((blog: any) => blog.featured === true)
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+  const socialLinks = [
+    { name: "赞赏", key: "buyMeACoffee" },
+    { name: "X", key: "x" },
+    { name: "小红书", key: "xiaohongshu" },
+    { name: "微信公众号", key: "wechat" },
+  ]
+    .map(item => ({
+      name: item.name,
+      href: config.social && config.social[item.key as keyof typeof config.social]
+    }))
+    .filter(link => !!link.href);
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       {/* 个人介绍部分 */}
@@ -16,16 +28,19 @@ export default function Home() {
         <h1 className="text-4xl font-bold">{config.site.title}</h1>
         <p className="text-md text-gray-600">{config.author.bio}</p>
         
-        {/* 社交链接 */}
-        <div className="flex space-x-2 text-gray-600">
-          <Link href={config.social.buyMeACoffee} className="underline underline-offset-4">赞赏</Link>
-          <span>·</span>
-          <Link href={config.social.x} className="underline underline-offset-4">X</Link>
-          <span>·</span>
-          <Link href={config.social.xiaohongshu} className="underline underline-offset-4">小红书</Link>
-          <span>·</span>
-          <Link href={config.social.wechat} className="underline underline-offset-4">微信公众号</Link>
-        </div>
+        {/* 社交链接 - 仅当有链接时才显示 */}
+        {socialLinks.length > 0 && (
+          <div className="flex space-x-2 text-gray-600">
+            {socialLinks.map((link, index) => (
+              <div key={link.name} className="flex items-center">
+                {index > 0 && <span className="mx-1">·</span>}
+                <Link href={link.href} className="underline underline-offset-4">
+                  {link.name}
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="space-y-4">

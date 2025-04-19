@@ -16,6 +16,18 @@ export function Header() {
   const pathname = usePathname();
   const isBlogPage = pathname.includes("/blog/");
 
+  const socialLinks = [
+    { title: "Github", key: "github", icon: <GithubIcon /> },
+    { title: "X", key: "x", icon: <XIcon /> },
+    { title: "Xiaohongshu", key: "xiaohongshu", icon: <XiaohongshuIcon /> },
+  ]
+    .map(item => ({
+      title: item.title,
+      href: config.social && config.social[item.key as keyof typeof config.social],
+      icon: item.icon
+    }))
+    .filter(link => !!link.href);
+
   return (
     <header className="pt-4">
       <motion.div
@@ -39,15 +51,11 @@ export function Header() {
 
         {/* Right side buttons */}
         <div className="flex items-center space-x-2 md:space-x-8 mr-4">
-          <Link href={config.social.github} title="Github">
-            <GithubIcon />
-          </Link>
-          <Link href={config.social.x} title="X">
-            <XIcon />
-          </Link>
-          <Link href={config.social.xiaohongshu} title="Xiaohongshu">
-            <XiaohongshuIcon />
-          </Link>
+          {socialLinks.map((link) => (
+            <Link key={link.title} href={link.href} title={link.title}>
+              {link.icon}
+            </Link>
+          ))}
         </div>
       </motion.div>
     </header >
