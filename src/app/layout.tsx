@@ -59,7 +59,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/json" title="JSON" href="/feed.json" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="min-w-md overflow-x-hidden">
+      <body className="overflow-x-hidden">
         <Header />
         {children}
       </body>

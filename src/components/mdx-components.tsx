@@ -104,7 +104,7 @@ const components = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("max-w-full rounded-md", className)} alt={alt} {...props} />
+    <img className={cn("max-w-full w-auto h-auto rounded-md", className)} alt={alt} {...props} />
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-4 md:my-8" {...props} />
@@ -114,7 +114,7 @@ const components = {
       <table
         className={cn(
           "mx-auto mb-12 w-full border-collapse border-spacing-0 text-left",
-          "text-[1.1rem]",
+          "text-sm sm:text-base md:text-[1.1rem]",
           className
         )}
         {...props}
@@ -146,19 +146,21 @@ const components = {
     />
   ),
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre
-      className={cn(
-        "text-[0.8rem] mt-4",
-        className
-      )}
-      {...props}
-    />
+    <div className="overflow-x-auto my-6">
+      <pre
+        className={cn(
+          "text-[0.8rem] max-w-full",
+          className
+        )}
+        {...props}
+      />
+    </div>
   ),
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "w-max-2xl rounded-[0.6rem] bg-[#ededeb] px-[0.3rem] py-[0.2rem]",
-        "font-mono text-[1.0rem] font-normal text-[#ed4759]",
+        "rounded-[0.6rem] bg-[#ededeb] px-[0.3rem] py-[0.2rem] break-words",
+        "font-mono text-sm md:text-[1.0rem] font-normal text-[#ed4759] overflow-wrap-anywhere",
         className
       )}
       {...props}
@@ -192,3 +194,4 @@ const components = {
 }
 
 export { components }
+

@@ -5,6 +5,10 @@ updated: 2025-04-05T20:10:00+08:00
 keywords: ["hello", "world"]
 featured: true
 summary: "这篇文章包含markdown语法基本的内容。"
+category: "tutorial"
+categoryDisplay: "教程"
+tags: ["markdown", "syntax", "beginner"]
+tagsDisplay: ["Markdown", "语法", "入门"]
 ---
 
 这篇文章包含markdown语法基本的内容。

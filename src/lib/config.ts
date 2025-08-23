@@ -29,6 +29,16 @@ export const config = {
     email: "your.email@example.com",
     bio: "这是一个 Nextjs 博客模板",
   },
+  // 文章分类显示控制
+  article_category: {
+    navbar: true,  // 在导航栏中显示分类
+    sidebar: true, // 在侧边栏中显示分类
+  },
+  // 文章标签显示控制
+  article_tag: {
+    navbar: true,  // 在导航栏中显示标签
+    sidebar: true, // 在侧边栏中显示标签
+  },
   social: {
     github: "https://github.com/xxx",
     x: "https://x.com/xxx",
@@ -46,6 +56,17 @@ export const config = {
       { 
         title: "文章", 
         href: "/blog",
+      },
+      {
+        title: "分类",
+        href: "#",
+        submenu: [
+          // 这里会动态生成分类菜单项
+        ]
+      },
+      {
+        title: "标签", 
+        href: "/tag",
       },
     ],
   },

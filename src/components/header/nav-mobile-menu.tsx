@@ -7,6 +7,8 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetTitle,
+  SheetHeader,
 } from "@/components/ui/sheet"
 import {
   Collapsible,
@@ -15,6 +17,8 @@ import {
 } from "@/components/ui/collapsible"
 import { cn } from "@/lib/utils"
 import { menuItems, MenuItem } from "./nav-data"
+import { useCategoriesMenu } from "./nav-dynamic-menu"
+import { config } from "@/lib/config"
 
 const MenuItemComponent: React.FC<{ item: MenuItem; depth?: number }> = ({ item, depth = 0 }) => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -64,6 +68,27 @@ const MenuItemComponent: React.FC<{ item: MenuItem; depth?: number }> = ({ item,
 export function NavMobileMenu() {
   const [open, setOpen] = React.useState(false)
 
+  // 使用动态生成的分类菜单
+  const categoriesMenu = useCategoriesMenu();
+
+  // 创建包含动态菜单的完整菜单项列表
+  const fullMenuItems = menuItems.filter(item => {
+    // 根据配置过滤分类和标签菜单项
+    if (item.title === "分类" && !config.article_category.navbar) {
+      return false;
+    }
+    if (item.title === "标签" && !config.article_tag.navbar) {
+      return false;
+    }
+    return true;
+  }).map(item => {
+    if (item.title === "分类") {
+      return categoriesMenu;
+    }
+    // 标签直接使用原始菜单项，不再生成下拉列表
+    return item;
+  });
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -73,8 +98,11 @@ export function NavMobileMenu() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-[240px] sm:w-[300px]">
-        <nav className="flex flex-col space-y-4 ml-4 mt-4">
-          {menuItems.map((item) => (
+        <SheetHeader>
+          <SheetTitle>导航菜单</SheetTitle>
+        </SheetHeader>
+        <nav className="flex flex-col space-y-4 ml-4">
+          {fullMenuItems.map((item) => (
             <MenuItemComponent key={item.title} item={item} />
           ))}
         </nav>
