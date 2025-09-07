@@ -13,6 +13,15 @@ export const config = {
       svg: "/favicon.svg",
       appleTouchIcon: "/favicon.png",
     },
+    logo: {
+      type: "img", // icon: 使用 Lucide 图标, svg: 使用 SVG 文件, img: 使用图片文件
+      icon: "SquareTerminal", // 当 type 为 "icon" 时使用的 Lucide 图标名称
+      svg: "/logo.svg", // 当 type 为 "svg" 时使用的 SVG 文件路径
+      img: "/favicon.png", // 当 type 为 "img" 时使用的图片文件路径
+      alt: "wangxiaotao's blog", // 图片的 alt 文本
+      width: 100, // logo 宽度
+      height: 100, // logo 高度
+    },
     manifest: "/site.webmanifest",
     rss: {
       title: "Nextjs Blog Template",
@@ -43,8 +52,8 @@ export const config = {
   },
   navigation: {
     main: [
-      { 
-        title: "文章", 
+      {
+        title: "文章",
         href: "/blog",
       },
     ],
@@ -52,7 +61,7 @@ export const config = {
   seo: {
     metadataBase: new URL("https://xxx.com"),
     alternates: {
-      canonical: './',
+      canonical: "./",
     },
     openGraph: {
       type: "website" as const,
